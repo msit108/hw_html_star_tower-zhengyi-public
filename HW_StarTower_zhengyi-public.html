@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <style>
+        body {
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    請選擇圖形:
+    <div>
+        <input type="radio" id="normal" name="graphSelect" checked />基礎星星塔&nbsp;&nbsp;
+        <input type="radio" id="deltoid" name="graphSelect" />正三角形&nbsp;&nbsp;
+        <input type="radio" id="rhombus" name="graphSelect" />菱形<br />
+    </div>
+    請輸入想要的階層數(菱形為每邊星星數):
+    <input type="text" id="txt1" name="txt1" />
+    <input type="button" id="btn1" name="btn1" value="畫圖" onclick="Button1_onclick()" /><br />
+    <div id="outputArea"></div>
+    <script>
+        function drawNormal(num) {
+            var input = Number.parseInt(num);
+            for (var i = 0; i < num; i++) {
+                for (var j = 0; j <= i; j++)
+                    outputArea.innerText = outputArea.innerText + "*";
+                outputArea.innerHTML = outputArea.innerHTML + "<br>";
+            }
+        }
+        function drawDeltoid(num) {
+            var input = Number.parseInt(num);
+            for (var i = 1; i <= input; i++) {
+                for (var j = input - i; j > 0 ; j--) {
+                    outputArea.innerHTML = outputArea.innerHTML + "&nbsp;";
+                }
+                for (var k = 0; k < i * 2 - 1; k++)
+                    outputArea.innerText = outputArea.innerText + "*";
+                outputArea.innerHTML = outputArea.innerHTML + "<br>";
+            }
+        }
+        function drawRhombus(num) {
+            var input = Number.parseInt(num);
+            for (var i = 1; i <= input * 2 - 1; i++) {
+                if (i <= input) {
+                    for (var j = input - i; j > 0 ; j--)
+                        outputArea.innerHTML = outputArea.innerHTML + "&nbsp;";
+
+                    for (var k = 0; k < i * 2 - 1; k++)
+                        outputArea.innerText = outputArea.innerText + "*";
+                }
+                else {
+                    for (var j = input; j < i; j++)
+                        outputArea.innerHTML = outputArea.innerHTML + "&nbsp;";
+                    for (var k = 0; k < input * 4 - i * 2 - 1; k++)
+                        outputArea.innerText = outputArea.innerText + "*";
+                }
+                outputArea.innerHTML = outputArea.innerHTML + "<br>";
+            }
+        }
+        function Button1_onclick() {
+            outputArea.innerHTML = "";
+            if (Number.parseInt(txt1.value) <= 0)
+                alert("輸入錯誤!");
+            if (normal.checked)
+                drawNormal(txt1.value);
+            else if (deltoid.checked)
+                drawDeltoid(txt1.value);
+            else if (rhombus.checked)
+                drawRhombus(txt1.value);
+        }
+    </script>
+</body>
+</html>
